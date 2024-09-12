@@ -13,7 +13,7 @@ class AppFixtures extends Fixture
     {
         // $product = new Product();
         // $manager->persist($product);
-        $faker=Factory::create("fr_Fr");
+        $faker=Factory::create("fr_FR");
 
         $fichierArtisteCsv=fopen(__DIR__."/artiste.csv","r");
         while (!feof($fichierArtisteCsv)){

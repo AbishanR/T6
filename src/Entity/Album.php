@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Album
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy:"NONE")]
+    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
