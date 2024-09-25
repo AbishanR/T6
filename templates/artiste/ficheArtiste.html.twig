@@ -7,7 +7,6 @@
 <hr>
 <div class="row pt-2">
     {% set nbAlbums = leArtiste.albums|length %}
-        <div class="col-sm-12.col-md-4.col-lg-4.col col-xl-3">
             <div class="card mb-3">
             <h3 class="card-header"></h3>
             <div class="row">
@@ -19,7 +18,7 @@
                         <a href="" class="badge badge-success">{{nbAlbums}}<h5 class="card-title"> {% if nbAlbums > 1 %} albums {% else %} album {% endif %}</a></h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">{{leArtiste.description|raw}}...</p>
+                    <p class="card-text">{{leArtiste.description|raw}}</p>
                 </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">{% if leArtiste.type == 0  %} Artiste solo {% else %} Groupe {% endif %}</li>
@@ -27,7 +26,6 @@
                     </ul>   
                 </div>
             </div>
-        </div>
     </div>
         <table class="table table-hover mx-auto">
         <thead>
@@ -43,7 +41,7 @@
         {% for leAlbum in leArtiste.albums %}
             <tr>
                 <td><img class="miniature" src="{{leAlbum.image}}" alt=""></td>
-                <td scope="row">{{leAlbum.nom}}</td>
+                <td scope="row"><a href="{{path('ficheAlbum' , {'id': leAlbum.id})}}">{{leAlbum.nom}}</a></td>
                 <td>{{leAlbum.date}}</td>
                 <td>Column content</td>
                 <td>{{leAlbum.morceaux|length}}</td>
@@ -51,7 +49,6 @@
         {% endfor %}
         </tbody>
     </table>
-{% endfor %}
 
 
 </div>
