@@ -23,6 +23,9 @@ class Morceau
     #[ORM\JoinColumn(nullable: false)]
     private ?Album $album = null;
 
+    #[ORM\Column]
+    private ?int $piste = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,6 +70,18 @@ class Morceau
     public function setAlbum(?Album $album): static
     {
         $this->album = $album;
+
+        return $this;
+    }
+
+    public function getPiste(): ?int
+    {
+        return $this->piste;
+    }
+
+    public function setPiste(int $piste): static
+    {
+        $this->piste = $piste;
 
         return $this;
     }
