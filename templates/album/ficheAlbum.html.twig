@@ -31,6 +31,7 @@
                 
                 </ul>   
                 </div>
+
     </div>
         <table class="table table-hover mx-auto">
         <thead>
@@ -44,14 +45,14 @@
         <tbody>
         {% for leMorceau in leAlbum.morceaux %}
             <tr>
-                <td scope="row"></td>
+                <td scope="row">{{leMorceau.piste}}</td>
                 <td>{{leMorceau.titre}}</td>
                 <td>{{leMorceau.duree}}</td>
             </tr>
+
         {% endfor %}
         </tbody>
     </table>
-
 
 </div>
 {% endblock %}

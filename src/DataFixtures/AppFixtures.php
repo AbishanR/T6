@@ -61,7 +61,7 @@ class AppFixtures extends Fixture
             $morceau ->setId (intval($value[0]))
                    ->setTitre ($value[2])
                    ->setAlbum($this->getReference("album".$value[1]))
-                   ->setDuree(date("i:s"), $value[3])
+                   ->setDuree(date("i:s", $value[3]))
                    ->setPiste(intval($value[4]));
 
             $manager->persist($morceau);
