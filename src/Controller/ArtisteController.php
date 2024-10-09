@@ -28,4 +28,8 @@ class ArtisteController extends AbstractController
             'leArtiste' => $artiste
         ]);
     }
+
+    
 }   
+
+
