@@ -53,6 +53,14 @@
 
 
         <div class="container">
+        {#fficher les msg flash#}
+        {% for label , messages in app.flashes  %}
+          <div class= "alert alert-{{label}} mt-3">
+            {% for message in messages %}
+                <p> {{message}} </p>
+            {% endfor %}
+          </div>
+        {% endfor %}
         {% block body %}{% endblock %}
         </div>
 
