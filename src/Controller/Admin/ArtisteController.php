@@ -53,4 +53,19 @@ class ArtisteController extends AbstractController
     }
 
 
-}
+    #[Route('/admin/artistes/supression/{id}', name: 'admin_artiste_supression', methods :'GET')]
+    public function supressionArtiste(Artiste $artiste, EntityManagerInterface $manager)
+    {
+        $nbAlbums=$artiste->getAlbums()->count();
+        if($nbAlbums>0){
+            $this->addFlash("danger", "Malheureusement, vous ne pouvez pas supprimer cette artiste car $nbAlbums album(s) y sont associés");
+        }else{
+            $manager->remove($artiste);
+            $manager->flush();
+            $this->addFlash("success", "L'artiste a bien été supprimé");
+        }
+
+        return $this->redirectToRoute('admin_app_artistes');
+    }
+    
+}   
