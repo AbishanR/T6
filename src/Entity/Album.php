@@ -6,8 +6,13 @@ use App\Repository\AlbumRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
+#[UniqueEntity(fields: ['nom','artiste'] ,
+                message:"Il ne peut exister deux album de même nom pour un même artiste.")]
+
 class Album
 {
     #[ORM\Id]
@@ -16,9 +21,15 @@ class Album
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:1, max:50,
+    minMessage: " Le nom de l'album doit comporter au minimum {{ limit }} caractères", 
+    maxMessage : " Le nom de l'album doit comporter au maximum {{ limit }} caractères" )]
+    #[Assert\NotBlank]
     private ?string $nom = null;
 
     #[ORM\Column]
+    #[Assert\Range(min:1940, max:2999,
+    notInRangeMessage : " Vous devez saisir une année comprise entre {{ min }} et {{ max }}" )]
     private ?int $date = null;
 
     #[ORM\Column(length: 255)]
@@ -26,12 +37,17 @@ class Album
 
     #[ORM\ManyToOne(inversedBy: 'albums')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
     private ?Artiste $artiste = null;
 
     #[ORM\OneToMany(targetEntity: Morceau::class, mappedBy: 'album')]
     private Collection $morceaux;
 
     #[ORM\ManyToMany(targetEntity: Style::class, mappedBy: 'albums')]
+    #[Assert\Count(
+        min:1,
+        minMessage : "Vous devez selectionner au moins un style"
+    )]
     private Collection $styles;
 
     public function __construct()

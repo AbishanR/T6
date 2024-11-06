@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Artiste;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -49,16 +50,9 @@ public function listeArtistesCompletePaginee(): Query
       ;
   }
 
-
+public function listeArtisteSimple():QueryBuilder{
+    return $this->createQueryBuilder('art')
+                ->orderBy('art.nom', 'ASC');
+}
     
-
-//    public function findOneBySomeField($value): ?Artiste
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
